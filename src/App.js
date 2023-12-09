@@ -23,10 +23,10 @@ const App = () => {
   }
 
   return (
-    <div>
+    <>
       <AddUser onAddUser={addUserHandler} users={usersList} />
       {usersList.length > 0 && <UsersList users={usersList} onDelete={deleteUserHandler} />}
-    </div>
+    </>
   );
 };
 
