@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { AddUser } from "./components/Users/AddUser";
 import { UsersList } from "./components/Users/UsersList";
-import './App.css';
 
 const App = () => {
   const [usersList, setUsersList] = useState([]);
@@ -13,16 +12,21 @@ const App = () => {
         { name: userName, age: userAge, id: Math.random().toString() },
       ];
     });
-
   };
 
-  console.log(usersList)
+  const deleteUserHandler = (userId) => {
+    setUsersList(prevList => {
+      return [
+        ...prevList.filter(item => item.id !== userId)
+      ]
+    })
+  }
 
   return (
-    <>
-      <AddUser onAddUser={addUserHandler} />
-      <UsersList users={usersList} />
-    </>
+    <div>
+      <AddUser onAddUser={addUserHandler} users={usersList} />
+      {usersList.length > 0 && <UsersList users={usersList} onDelete={deleteUserHandler} />}
+    </div>
   );
 };
 
